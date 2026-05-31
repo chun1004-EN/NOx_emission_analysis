@@ -1,2 +1,8 @@
 # NOx_emission_analysis
 可解释机器学习预测NOx排放的代码
+# 基于可解释机器学习的NOx排放预测与归因分析
+​本仓库提供论文《基于可解释机器学习的NOx排放预测与归因分析》的完整代码。
+- `chapter2_preprocess/data_preprocessing.py` – 数据清洗、特征构造、标准化、数据集划分
+- `chapter3_xgboost/` – XGBoost模型训练与评估
+- `chapter4_shap/` – SHAP归因分析与跨模型对比
+运行环境：Python 3.8+，依赖库见 `requirements.txt`
