@@ -293,8 +293,10 @@ importance_df = pd.DataFrame({
     'RandomForest': mean_abs_shap_rf,
     'SVM': mean_abs_shap_svm
 })
+
+# 保留4位小数（不影响原始数组，只影响表格保存和打印）
+importance_df[['XGBoost', 'RandomForest', 'SVM']] = importance_df[['XGBoost', 'RandomForest', 'SVM']].round(4)
+
 importance_df.to_csv('shap_importance_comparison.csv', index=False, encoding='utf-8-sig')
 print("\n三个模型的SHAP特征重要性对比已保存至 shap_importance_comparison.csv")
-print(importance_df.sort_values('XGBoost', ascending=False).to_string(index=False))
-
-print("\n所有图像和表格生成完毕！")
+print(importance_df.sort_values('XGBoost', ascending=False).to_string(index=False, float_format='{:.4f}'.format))
