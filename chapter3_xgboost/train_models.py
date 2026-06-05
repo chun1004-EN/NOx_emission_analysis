@@ -96,15 +96,16 @@ comparison_df.to_csv('model_comparison.csv', index=False, encoding='utf-8-sig')
 print("\n模型对比结果已保存到 model_comparison.csv")
 
 # ========== 7. 绘图1：XGBoost散点图（预测值与真实值） ==========
-plt.figure(figsize=(8, 6))
-mask = (y_test <= upper_limit) & (y_pred_xgb <= upper_limit)
-plt.scatter(y_test[mask], y_pred_xgb[mask], s=10, alpha=0.3, color='blue')
+# 设定坐标轴上限（可根据需要修改为12或15）
+upper_limit = 12.0   # 或使用自适应：upper_limit = max(np.percentile(y_test, 95), np.percentile(y_pred_xgb, 95))
+plt.figure(figsize=(6, 6))
+# 不进行mask截断，保留所有点（但绘图时xlim/ylim会限制显示范围）
+plt.scatter(y_test, y_pred_xgb, s=15, alpha=0.3, color='blue')
 plt.plot([0, upper_limit], [0, upper_limit], 'r--', linewidth=2)
 plt.xlim(0, upper_limit)
 plt.ylim(0, upper_limit)
-plt.xlabel("真实值 (g/s)", fontsize=14)
-plt.ylabel("预测值 (g/s)", fontsize=14)
-plt.title("XGBoost 预测值与真实值对比", fontsize=16, pad=10)
+plt.xlabel("真实值 (g/s)", fontsize=16)
+plt.ylabel("预测值 (g/s)", fontsize=16)
 plt.tight_layout()
 plt.savefig('scatter_xgb.png', dpi=300)
 plt.show()
@@ -120,7 +121,6 @@ bars = plt.barh(range(len(sorted_importance)), sorted_importance,
                 color='steelblue', edgecolor='navy', linewidth=0.8, alpha=0.85)
 plt.yticks(range(len(sorted_importance)), sorted_features, fontsize=11)
 plt.xlabel("特征重要性", fontsize=14, labelpad=8)
-plt.title("XGBoost 内置特征重要性", fontsize=16, pad=12)
 plt.grid(axis='x', linestyle='--', alpha=0.5)
 for i, (bar, val) in enumerate(zip(bars, sorted_importance)):
     plt.text(val + 0.002, bar.get_y() + bar.get_height()/2,
