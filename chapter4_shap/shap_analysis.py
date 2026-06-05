@@ -37,7 +37,7 @@ def plot_shap_bar(mean_abs_shap, feature_names, model_name, save_path, color='st
                     color=color, edgecolor='navy', linewidth=0.8, alpha=0.85)
     plt.yticks(range(len(sorted_idx)), sorted_features, fontsize=11)
     plt.xlabel('平均 |SHAP 值|', fontsize=14, labelpad=8)
-    plt.title(f'{model_name} SHAP 特征重要性', fontsize=16, pad=12)
+    # 已删除：plt.title(f'{model_name} SHAP 特征重要性', fontsize=16, pad=12)
     plt.grid(axis='x', linestyle='--', alpha=0.5)
 
     for i, (bar, val) in enumerate(zip(bars, sorted_values)):
@@ -67,7 +67,7 @@ def plot_dependence_manual(shap_values, feature_vals, feature_name, interact_val
     cbar.set_label(interact_name, fontsize=14)   # 调大
     plt.xlabel(feature_name, fontsize=14)        # 调大
     plt.ylabel('SHAP 值', fontsize=14)           # 调大
-    plt.title(f'{feature_name} 的 SHAP 依赖图{title_suffix}', fontsize=16)  # 调大
+    # 已删除：plt.title(f'{feature_name} 的 SHAP 依赖图{title_suffix}', fontsize=16)
     plt.tight_layout()
     plt.savefig(save_path, dpi=300)
     plt.close()
@@ -136,7 +136,7 @@ print("XGBoost SHAP 计算完成。")
 plt.figure(figsize=(10, 7))
 shap.summary_plot(xgb_shap_values, X_test_scaled, feature_names=feature_cols,
                   show=False, cmap='coolwarm')
-plt.title('XGBoost SHAP 摘要图', fontsize=16, pad=15)
+# 已删除：plt.title('XGBoost SHAP 摘要图', fontsize=16, pad=15)
 plt.tight_layout()
 plt.savefig('shap_summary_new.png', dpi=300, bbox_inches='tight')
 plt.close()
@@ -220,7 +220,7 @@ print(f"RF SHAP 计算完成，耗时 {time.time()-start:.2f} 秒")
 plt.figure(figsize=(10, 7))
 shap.summary_plot(rf_shap_values, X_test_scaled, feature_names=feature_cols,
                   show=False, cmap='coolwarm')
-plt.title('随机森林 SHAP 摘要图', fontsize=16, pad=15)
+# 已删除：plt.title('随机森林 SHAP 摘要图', fontsize=16, pad=15)
 plt.tight_layout()
 plt.savefig('shap_summary_rf.png', dpi=300, bbox_inches='tight')
 plt.close()
@@ -260,7 +260,7 @@ print("SVM SHAP 计算完成")
 plt.figure(figsize=(10, 7))
 shap.summary_plot(svm_shap_values, X_test_sampled, feature_names=feature_cols,
                   show=False, cmap='coolwarm')
-plt.title('SVM SHAP 摘要图（抽样300样本）', fontsize=16, pad=15)
+# 已删除：plt.title('SVM SHAP 摘要图（抽样300样本）', fontsize=16, pad=15)
 plt.tight_layout()
 plt.savefig('shap_summary_svm_sampled.png', dpi=300, bbox_inches='tight')
 plt.close()
